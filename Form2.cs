@@ -35,21 +35,22 @@ namespace workbase
 
         private void button2_Click(object sender, EventArgs e)
         {
-            int a, b;
-            if (textBox2.Text == string.Empty) a = 0;
-            else a = Convert.ToInt32(textBox2.Text);
-            if (textBox3.Text == string.Empty) b = 0;
-            else b = Convert.ToInt32(textBox3.Text);
-            int m =a * b;
+            double pricePerPiece;
+            int numberOfMade;
+            if (textBox2.Text == string.Empty) pricePerPiece = 0;
+            else pricePerPiece = Convert.ToDouble(textBox2.Text);
+            if (textBox3.Text == string.Empty) numberOfMade = 0;
+            else numberOfMade = Convert.ToInt32(textBox3.Text);
+            double multiplication = pricePerPiece * numberOfMade;
             if (file_index == -1)
             {
-                f1.files.Add(new File(textBox1.Text, a, b, m));
+                f1.files.Add(new File(textBox1.Text, pricePerPiece, numberOfMade, multiplication));
                 f1.show_files();
             }
             else
             {
-                File f = new File(textBox1.Text, a, b, m);
-                f1.files[file_index] = f;
+                f1.files.RemoveAt(file_index);
+                f1.files.Insert(file_index, new File(textBox1.Text, pricePerPiece, numberOfMade, multiplication));
                 f1.show_files();
             }
             Close();
